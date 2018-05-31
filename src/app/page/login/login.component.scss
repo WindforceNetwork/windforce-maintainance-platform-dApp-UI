@@ -1,0 +1,84 @@
+.login-background{
+  height:100%;
+  //background: linear-gradient(to bottom, #009999 0%, #006699 100%);
+  background: #08091b;
+
+}
+.login-input{
+  color: #fff;
+  background: #0b0c22;
+  border: 1px solid #8284a5;
+  font-size: 0.7em;
+  border-radius: 2.5em;
+  line-height: 4em;
+  width: 100%;
+  padding-left: 2em;
+  outline: none;
+  transition: all .5s ease;
+}
+
+.particles {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: block;
+    /* background: url(assets/header-bottom.png) bottom center no-repeat, url(assets/particle-left.png) top left no-repeat, url(assets/particle-right.png) top right no-repeat, #08091b; */
+    background-size: 100%, auto, auto, auto;
+    z-index: 0;
+  }
+  .brand {
+    display: inline-flex;
+    margin-right: 4em;
+    .icon {
+      height: 40px;
+      width: 40px;
+    }
+    .title {
+      display: inline-block;
+      margin: 5px 15px;
+      color: Snow;
+      font-weight: 600;
+    }
+  }
+  .cardDiv {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-card{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 6px;
+    background: linear-gradient(to bottom, #009999 0%, #006699 100%);
+  }
+  .container{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .login-button{
+    line-height: 1.7;
+    text-align: center;
+    width: 100%;
+    padding: 5px!important;
+    margin-bottom: 15px;
+    border-radius: 50px;
+    background-color: black;
+    color: white;
+    font-size: 18px;
+  }
+
+  ::ng-deep .error-message .mat-simple-snackbar {
+    color: white;
+  }
+
+  ::ng-deep snack-bar-container.error-message {
+    background: red ;
+  }
+
+/* .container > *{
+  width: 100%;
+} */

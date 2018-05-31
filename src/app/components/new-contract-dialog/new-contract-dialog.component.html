@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>New Contract | Vending Machine Maintainance</h2>
+<form class="new-dialog-form" (submit)="sendRequest()">
+  <mat-dialog-content>
+      <mat-grid-list cols="1">
+        <mat-grid-tile>
+        <div class="margin-left-right">
+          <mat-form-field class="full-input">
+              <input matInput placeholder="Provider" [value]="'Viatick'" disabled>
+          </mat-form-field>
+          <mat-form-field class="full-input">
+              <textarea matInput placeholder="Description" [value]="'Rate is fixed per machine per month'" disabled></textarea>
+          </mat-form-field>
+          <mat-form-field class="full-input">
+              <input matInput placeholder="Rate" [value]="'1 WIND per unit per 30 days'" disabled>
+          </mat-form-field>
+          <mat-form-field class="full-input">
+            <input matInput [matDatepicker]="picker" placeholder="Start date (pick from calendar)">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="full-input">
+              <input matInput placeholder="Number of Recurrences" [formControl]="quantityFormControl" [(ngModel)]="newRequest.recurrence"
+                type="number" [min]="1" [max]="9999999">
+          </mat-form-field>
+          <mat-form-field class="full-input">
+              <input matInput placeholder="Unit" [formControl]="quantityFormControl"
+                [errorStateMatcher]="matcher" [(ngModel)]="newRequest.quantity"
+                type="number" [min]="1" [max]="9999999">
+              <mat-error *ngIf="quantityFormControl.hasError('required')">
+                Number of units is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="quantityFormControl.errors?.min">
+                Number of units can't be lower than 1
+              </mat-error>
+              <mat-error *ngIf="quantityFormControl.errors?.min">
+                Number of units can't be higher than 9999999
+              </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-input">
+            <input matInput placeholder="Total Cost" [value]="newRequest.quantity * newRequest.recurrence * 1 + ' ' + 'WIND from 13/3/2018 to 13/3/2019'" disabled>
+          </mat-form-field>
+          <div class="alert alert-warning" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            This is a recurring contract. Monthly cost will be automatically deducted from this account. Contract will automatically terminated if
+            you don't have enough balance left in your account.
+          </div>
+        </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close type="button">Close</button>
+    <button mat-button cdkFocusInitial type="submit">Submit</button>
+  </mat-dialog-actions>
+</form>

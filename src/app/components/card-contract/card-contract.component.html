@@ -1,0 +1,71 @@
+<mat-card>
+  <mat-card-content>
+    <mat-grid-list cols="3" rowHeight="30px">
+      <mat-grid-tile colspan="1" rowspan="2">
+        <img src="../../../assets/contract.png" alt="Photo of a Shiba Inu" height="42" width="42">
+      </mat-grid-tile>
+      <mat-grid-tile  colspan="2" rowspan="2">
+        <div class="template-value-id">
+          {{contract[0].contractId}}
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1" class="template-attribute">
+        <div>
+          Provider
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="1">
+        <div class="template-value">
+          {{contract[0].provider}}
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1" class="template-attribute">
+        <div>
+          Type
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="1">
+        <div class="template-value">
+          {{contract[0].type}}
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan='1' class="template-attribute">
+        <div>
+          Total Cost
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan='1'>
+        <!-- <div class="template-value"> -->
+
+          <mat-chip-list  class="template-value-chip">
+            <mat-chip color="accent" selected="true">{{contract[0].cost}} WIND</mat-chip>
+          </mat-chip-list>
+        <!-- </div> -->
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan='1' class="template-attribute">
+        <div>
+          Details
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan='1'>
+        <div class="template-value">
+          {{contract[0].details}}
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan='1' class="template-attribute">
+        <div>
+          Status
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan='1'>
+        <!-- <div class="template-value-id"> -->
+
+          <mat-chip-list  class="template-value-chip">
+            <mat-chip *ngIf ="contract[0].status == 'ongoing'" color="accent" selected="true">{{contract[0].status}}</mat-chip>
+            <mat-chip *ngIf ="contract[0].status != 'ongoing'" selected="true" style="color: white;">{{contract[0].status}}</mat-chip>
+          </mat-chip-list>
+        <!-- </div> -->
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>

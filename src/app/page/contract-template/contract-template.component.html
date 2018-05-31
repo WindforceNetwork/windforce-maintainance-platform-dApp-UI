@@ -1,0 +1,41 @@
+<div>
+
+
+<mat-card>
+  <mat-card-title>New Maintainance Contract Template</mat-card-title>
+  <mat-grid-list cols="5" rowHeight="30px">
+    <mat-grid-tile colspan="1" rowspan="1">Provider</mat-grid-tile>
+    <mat-grid-tile colspan="4" rowspan="1">
+      <mat-form-field >
+        <input matInput placeholder="Viatick" [disabled]="true">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="2">Details</mat-grid-tile>
+    <mat-grid-tile colspan="4" rowspan="2">
+        <textarea matInput placeholder="Details"></textarea>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">Condition</mat-grid-tile>
+    <mat-grid-tile colspan="4" rowspan="1"></mat-grid-tile>
+    <mat-grid-tile colspan="5" rwospan="1">
+      <p>
+      </p>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <button mat-raised-button>Add</button>
+  <button mat-raised-button>Cancel</button>
+
+<!--
+
+    <mat-form-field>
+      <textarea matInput placeholder="Textarea"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Select">
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+
+</mat-card>
+</div>

@@ -1,0 +1,38 @@
+<div class="maintainance-component">
+
+  
+
+
+<hr>
+<p class="add-new" *ngIf="contractsList">
+  <button mat-button (click)="createNewTemplate()" class="new-button">+ New Contract Template</button>
+</p>
+
+  <!-- <div>
+    <div class="add-new-contract">
+      <button mat-icon-button (click) = goToMaintainanceTemplate()>
+        <mat-icon style="color:#00BCD4">add_circle</mat-icon>
+      </button>
+      <span>Add New Maintainance Contract Template</span>
+    </div>
+    <div>
+      <button mat-icon-button (click) = goToRequestMaintainance()>
+        <mat-icon style="color:#00BCD4">add_circle</mat-icon>
+      </button>
+      <span>Add New Maintainance Contract</span>
+    </div>
+  </div> -->
+<div *ngIf="contractsList">
+  <app-card-tile [title]="'Existing Maintainance Contract Template'" [templatesOrContracts]=[templates]></app-card-tile>
+  <mat-divider></mat-divider>
+  <app-card-tile title="Browse Maintainance Contract Template" [templatesOrContracts]=[templates]></app-card-tile>
+  <mat-divider></mat-divider>
+  <app-card-tile title="Maintainance Contract" [templatesOrContracts]=[goingContracts]></app-card-tile>
+  <!-- <app-card-tile title="Completed Maintainance Contract" [templatesOrContracts]=[completedContracts]></app-card-tile>
+  <app-card-tile title="Failed Maintainance Contract" [templatesOrContracts]=[failedContracts]></app-card-tile> -->
+</div>
+<div *ngIf ="newTemplateShow">
+  <app-contract-template></app-contract-template>
+</div>
+
+</div>

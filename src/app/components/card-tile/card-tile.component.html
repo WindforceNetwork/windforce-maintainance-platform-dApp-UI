@@ -1,0 +1,79 @@
+<h3>{{title}}</h3>
+<div [ngSwitch] = "title">
+  <!-- template -->
+  <!-- <ngx-carousel
+    [inputs]="carouselTile"
+    (carouselLoad)="carouselTileLoad($event)" *ngSwitchCase = "'Existing Maintainance Contract Template'"> -->
+    <!-- <ngx-tile NgxCarouselItem *ngFor="let template of templates">
+      <app-card-template [template]=[template]></app-card-template>
+      </ngx-tile>
+    <button NgxCarouselPrev class='leftRs'>&lt;</button>
+    <button NgxCarouselNext class='rightRs'>&gt;</button> -->
+    <p *ngSwitchCase = "'Existing Maintainance Contract Template'">You have no existing template.</p>
+    <br>
+  <!-- </ngx-carousel> -->
+
+  <div *ngSwitchCase = "'Browse Maintainance Contract Template'">
+    <mat-form-field class="example-full-width">
+    <input matInput placeholder="Filter Provider...">
+  </mat-form-field>
+
+    <ngx-carousel
+      [inputs]="carouselTile"
+      (carouselLoad)="carouselTileLoad($event)">
+        <ngx-tile NgxCarouselItem *ngFor="let template of templates">
+          <app-card-template [template]=[template]></app-card-template>
+          </ngx-tile>
+        <button NgxCarouselPrev class='leftRs'>&lt;</button>
+        <button NgxCarouselNext class='rightRs'>&gt;</button>
+    </ngx-carousel>
+</div>
+
+  <!-- ongoing  -->
+  <!-- <ngx-carousel
+    [inputs]="carouselTile"
+    (carouselLoad)="carouselTileLoad($event)" *ngSwitchCase = "'Ongoing Maintainance Contract'">
+      <ngx-tile NgxCarouselItem *ngFor="let goingContract of goingContracts" >
+          <app-card-contract [contract]=[goingContract]></app-card-contract>
+        </ngx-tile>
+      <button NgxCarouselPrev class='leftRs'>&lt;</button>
+      <button NgxCarouselNext class='rightRs'>&gt;</button>
+  </ngx-carousel> -->
+    <mat-tab-group *ngSwitchCase = "'Maintainance Contract'">
+      <mat-tab label="All" style="font-weight: 500; font-size: 16px;">
+        <mat-grid-list cols="5" rowHeight="1:1">
+        <br>
+        <mat-grid-tile *ngFor="let goingContract of goingContracts">
+          <app-card-contract style="width: 95%; border: 3px solid rgba(22, 160, 133,1.0);" *ngIf="goingContract.status == 'ongoing'" [contract]=[goingContract]></app-card-contract>
+          <app-card-contract style="width: 90%; border: 3px solid grey;" *ngIf="goingContract.status == 'pending'" [contract]=[goingContract]></app-card-contract>
+        </mat-grid-tile>
+        </mat-grid-list>
+      </mat-tab>
+      <mat-tab label="Pending">Pending</mat-tab>
+      <mat-tab label="Ongoing">Ongoing</mat-tab>
+      <mat-tab label="Completed">Completed</mat-tab>
+      <mat-tab label="Failed/Canceled">Failed/Canceled</mat-tab>
+    </mat-tab-group>
+
+<!-- completed -->
+  <!-- <ngx-carousel
+    [inputs]="carouselTile"
+    (carouselLoad)="carouselTileLoad($event)" *ngSwitchCase = "'Completed Maintainance Contract'">
+      <ngx-tile NgxCarouselItem *ngFor="let completedContract of completedContracts">
+        <app-card-contract [contract]=[completedContract]></app-card-contract>
+        </ngx-tile>
+      <button NgxCarouselPrev class='leftRs'>&lt;</button>
+      <button NgxCarouselNext class='rightRs'>&gt;</button>
+  </ngx-carousel> -->
+
+<!-- failed -->
+  <!-- <ngx-carousel
+    [inputs]="carouselTile"
+    (carouselLoad)="carouselTileLoad($event)" *ngSwitchCase = "'Failed Maintainance Contract'">
+      <ngx-tile NgxCarouselItem *ngFor="let failedContract of failedContracts">
+        <app-card-contract [contract]=[failedContract]></app-card-contract>
+        </ngx-tile>
+      <button NgxCarouselPrev class='leftRs'>&lt;</button>
+      <button NgxCarouselNext class='rightRs'>&gt;</button>
+  </ngx-carousel> -->
+</div>

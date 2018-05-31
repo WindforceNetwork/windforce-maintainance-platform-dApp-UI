@@ -1,0 +1,32 @@
+<div class="login-background">
+  <particles class="particles" [style]="particles.style" [width]="particles.width" [height]="particles.height" [params]="particles.params"></particles>
+  <div class="cardDiv">
+    <mat-card class="login-card">
+      <mat-card-header>        
+
+        <div class="brand animated fadeInDown" pageScroll>
+          <img [src]="favicon.url" class="icon">
+          <span class="title">
+            {{ content.title|textFormat:3 }}
+          </span>
+        </div>
+        
+      </mat-card-header>
+      <mat-card-content class="container">
+        <mat-form-field>
+          <input matInput placeholder="Public Key" [(ngModel)] = "address">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" [(ngModel)] = "password">
+        </mat-form-field>
+        <re-captcha (resolved)="resolved($event)" siteKey="6LfHgEMUAAAAAKWAgZWBVh4iRF6I6WrKp4d1oN1I"></re-captcha>
+      </mat-card-content>
+      <mat-card-actions>
+        <button class="login-button btn-outline" mat-raised-button (click) ="login()">Log In</button>
+      </mat-card-actions>
+    </mat-card>
+    <div>
+    </div>
+
+
+    <!-- <app-recaptcha></app-recaptcha> -->

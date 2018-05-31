@@ -1,0 +1,102 @@
+<div class="maintainance-component" style="min-height: 500px;">
+
+  <i class="fab fa-accessible-icon"></i>
+
+  <mat-grid-list cols="3">
+    <mat-grid-tile colspan="1">
+      <mat-card style="width: 90%; height: 90%;">
+        <mat-card-title>
+          <span class="contract-card-title">{{'your accounts'|textFormat: 3}}</span>
+        </mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+
+          <mat-list>
+            <mat-list-item>
+              <mat-icon mat-list-icon>face</mat-icon>
+              <h4 mat-line style="font-weight: bold;">{{'Viatick'|textFormat: 3}}</h4>
+              <p mat-line>0x84aa8428392a7a1ec02675e9c2f9eaee014e30fd</p>
+              <span mat-line style="text-align: right;">
+                <button mat-icon-button><fa name="qrcode" size="lg"></fa></button>
+                <button mat-icon-button><fa name="copy" size="lg"></fa></button></span>
+              </mat-list-item>
+            </mat-list>
+
+            <mat-divider></mat-divider>
+            <mat-grid-list cols="2" style="margin-top: 15px">
+              <mat-grid-tile colspan="1">
+                <div>
+                  <h5 style="text-decoration: underline;">Balance</h5>   
+                  <p style="font-weight: bold;">50000.00 WIND</p>
+                  <p>126.00 USDT</p>
+                  <p>0 TIP</p>    
+                  <span><button mat-button class="new-button">View on Block Explorer</button></span>
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1">
+                <div style="background-size: auto;
+                background-repeat: no-repeat;
+                background-position: center;
+                vertical-align: center;
+                height: 250px;
+                width: 250px;
+                background: url('/assets/qr.jpg');
+                margin-bottom: 20px;"></div>
+              </mat-grid-tile>
+
+            </mat-grid-list>
+            
+            
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-card style="width: 90%; min-height: 90%;">
+         <mat-card-title style="display: flex; justify-content: space-between;">
+          <span class="contract-card-title">{{'latest transactions'|textFormat: 3}}</span>
+        </mat-card-title>
+        <mat-divider></mat-divider>
+
+        <mat-table #table [dataSource]="dataSource">
+          <ng-container matColumnDef="txHash">
+            <mat-header-cell *matHeaderCellDef> TxHash </mat-header-cell>
+            <mat-cell *matCellDef="let element"> <a style="color: rgba(6, 92, 111, 1)" href="http://etherscan.io">{{element.txHash}}</a> </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="timestamp">
+            <mat-header-cell *matHeaderCellDef> Timestamp </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.timestamp}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="from">
+            <mat-header-cell *matHeaderCellDef> From</mat-header-cell>
+            <mat-cell *matCellDef="let element"> <a style="color: rgba(6, 92, 111, 1)" href="http://etherscan.io">{{element.from}}</a> </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="to">
+            <mat-header-cell *matHeaderCellDef> To </mat-header-cell>
+            <mat-cell *matCellDef="let element"> <a style="color: rgba(6, 92, 111, 1)" href="http://etherscan.io">{{element.to}}</a> </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="value">
+            <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.value}} {{element.unit}}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <mat-paginator #paginator
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 20]"
+        [showFirstLastButtons]="true">
+      </mat-paginator>
+
+
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+</div>

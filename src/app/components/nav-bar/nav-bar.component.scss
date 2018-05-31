@@ -1,0 +1,67 @@
+.navbar {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	z-index: 999;
+	.brand {
+		display: inline-flex;
+		margin-right: 4em;
+		.icon {
+			height: 40px;
+			width: 40px;
+		}
+		.title {
+			display: inline-block;
+			margin: 5px 15px;
+			color: Snow;
+			font-weight: 600;
+		}
+	}
+	.button {
+		color: Snow;
+	}
+	.link {
+		font-size: 0.8em;
+		color: Snow;
+		cursor: pointer;
+	}
+	.menu-link {
+		background-image: linear-gradient(to right, #2b56f5 0%, #46bdf4 100%);
+		font-size: 0.7em;
+		padding: 1em 2em;
+		border: none;
+		color: Snow;
+		border-radius: 2em;
+		position: relative;
+		.overlay {
+			position: absolute;
+			top: 2px;
+			left: 2px;
+			right: 2px;
+			bottom: 2px;
+			border-radius: 2em;
+			background-color: #020207;
+			transition: opacity 0.25s ease;
+			line-height: 3em;
+			&:hover {
+				opacity: 0;
+			}
+		}
+	}
+	&.slide-in {
+		position: fixed;
+		background-color: #020207;
+		animation: navslide 0.6s ease 0s;
+	}
+	&.slide-out {
+		animation: navslide 0.6s ease 0s alternate;
+	}
+	@keyframes navslide {
+		from {
+			transform: translateY(-66px);
+		}
+		to {
+			transform: translateY(0px);
+		}
+	}
+}

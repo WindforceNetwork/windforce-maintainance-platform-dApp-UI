@@ -1,0 +1,19 @@
+.navigation-bar-title{
+  height: 100%;
+  position: relative;
+  top: 25%;
+}
+
+.button-tab{
+  font-size: 20px;
+}
+
+.logout-button{
+  padding-top: 3px;
+  right: 0;
+  position: absolute;
+  transition: color 200ms linear 0s;
+}
+.logout-button:hover{
+  color: #2595ff;
+}

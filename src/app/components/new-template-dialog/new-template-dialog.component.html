@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>New Contract Template</h2>
+<form class="new-dialog-form" (submit)="sendRequest()">
+  <mat-dialog-content>
+      <mat-grid-list cols="1">
+        <mat-grid-tile>
+        <div class="margin-left-right">
+          <mat-form-field class="full-input">
+              <input matInput placeholder="Name" required>
+          </mat-form-field>
+          <mat-form-field class="full-input">
+              <textarea matInput placeholder="Description" required></textarea>
+          </mat-form-field>
+          <mat-form-field class="full-input">
+              <input matInput placeholder="Rate (WIND)" type="number" required>
+          </mat-form-field>
+          <div>
+            <mat-checkbox matInput>Recurring Contract</mat-checkbox>
+          </div>
+          <br>
+          <div>
+            <mat-checkbox matInput>Per-Unit Rate</mat-checkbox>
+          </div>
+          <br>
+          <mat-form-field class="full-input">
+            <mat-select placeholder="Recurring By" required>
+              <mat-option [value]="'Day'">Day
+              </mat-option>
+              <mat-option [value]="'Week'">Week
+              </mat-option>
+              <mat-option [value]="'Month'">Month
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            The recurring contracts created from this template will automatically charge the customer 7 WIND each month
+          </div>
+          <br>
+        </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close type="button">Close</button>
+    <button mat-button cdkFocusInitial type="submit">Add</button>
+  </mat-dialog-actions>
+</form>

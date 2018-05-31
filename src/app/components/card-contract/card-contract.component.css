@@ -1,0 +1,33 @@
+.list-info{
+  height: 100%;
+  width: 100%;
+}
+
+.template-attribute{
+  font-weight: bold;
+}
+
+.template-value{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 25%;
+}
+
+.template-value-chip{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.template-value-id{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 38%;
+  font-weight: 100;
+}
+
+h3 {
+  color: #16a085;
+}
