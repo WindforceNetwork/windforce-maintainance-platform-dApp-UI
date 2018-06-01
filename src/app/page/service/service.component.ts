@@ -7,6 +7,7 @@ import { NewTemplateDialogComponent } from '../../components/new-template-dialog
 import { NgxCarousel } from '../../interfaces/ngx-carousel';
 import { Contract } from '../../interfaces/contract';
 import { ContractTemplate } from '../../interfaces/contract-template';
+import { ContractsService } from '../../contracts.service';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class ServiceComponent implements OnInit {
   public templates: Array<ContractTemplate>;
 
 
-  constructor(private dialog: MatDialog) { 
+  constructor(private dialog: MatDialog, private contract: ContractsService) { 
     this.favicon = {
       url : "../../../assets/favicon_g.png"
     };
@@ -96,6 +97,13 @@ export class ServiceComponent implements OnInit {
 
     this.failedContracts= [
     ]
+
+    this.contract.getAccount().then(acc => {
+      console.log(acc);
+      console.log(this.contract.getAccountBalance(acc).c[0]/1000);
+      console.log(this.contract.getAccountTransactions(acc));
+    });
+    
 
 
 

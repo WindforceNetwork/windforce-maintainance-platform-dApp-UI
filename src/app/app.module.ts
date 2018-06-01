@@ -44,6 +44,7 @@ import { ContractTemplateComponent } from './page/contract-template/contract-tem
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ApiService } from './services/api.service';
 import { DaoService } from './services/dao.service';
+import { ContractsService } from './contracts.service';
 import { HttpModule } from '@angular/http';
 import { CardContractListComponent } from './components/card-contract-list/card-contract-list.component';
 import { NewContractDialogComponent } from './components/new-contract-dialog/new-contract-dialog.component';
@@ -123,7 +124,7 @@ const ROUTES: Route[] = [
     MatBadgeModule,
     NgbModule.forRoot()
   ],
-  providers: [ApiService, DaoService],
+  providers: [ApiService, DaoService, ContractsService],
   bootstrap: [AppComponent],
   entryComponents: [NewContractDialogComponent, NewTemplateDialogComponent]
 })
