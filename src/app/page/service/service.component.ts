@@ -32,6 +32,10 @@ export class ServiceComponent implements OnInit {
   public failedContracts : Array<Contract>;
   public templates: Array<ContractTemplate>;
 
+  //wallet data
+  private transaction: Array<any> = [];
+  private balance: number;
+  private address: string;
 
   constructor(private dialog: MatDialog, private contract: ContractsService) { 
     this.favicon = {
@@ -99,11 +103,13 @@ export class ServiceComponent implements OnInit {
     ]
 
     this.contract.getAccount().then(acc => {
-      console.log(acc);
-      console.log(this.contract.getAccountBalance(acc).c[0]/1000);
+      this.address = acc;
+      
+      this.balance = this.contract.getAccountBalance(acc).c[0]/1000;
       console.log(this.contract.getAccountTransactions(acc));
     });
     
+
 
 
 
@@ -113,6 +119,8 @@ export class ServiceComponent implements OnInit {
       console.log(this.service);
       console.log(this.currentPage);
   }
+
+  
 
   switchPage (page: string) {
     this.currentPage = page;

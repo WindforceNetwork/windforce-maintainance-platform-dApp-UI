@@ -7,13 +7,15 @@ import { MatSnackBar, MatSnackBarConfig,  MatSnackBarHorizontalPosition,
 
 
 
-  @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
-  })
-  export class LoginComponent implements OnInit {
-    private address: string;
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
+})
+export class RegisterComponent implements OnInit {
+
+  private address: string;
     private password: string;
     private isUserLogedIn : boolean;
     private captcha : string;
@@ -85,11 +87,7 @@ import { MatSnackBar, MatSnackBarConfig,  MatSnackBarHorizontalPosition,
       console.log(`Resolved captcha with response ${captchaResponse}:`);
     }
 
-    toRegister(){
-      this.router.navigate(["./register"]);
-    }
-
-    login(){
+    register(){
     // if(this.username == "admin" && this.password == "password"){
     //   if(this.captcha != null){
     //     this.router.navigate(['./service']);
@@ -140,7 +138,9 @@ import { MatSnackBar, MatSnackBarConfig,  MatSnackBarHorizontalPosition,
       //   });
       // }
       this.dao.setAccount(this.address, "", true);
-      this.router.navigate(['./service']);
+      this.router.navigate(['']);
     }
   }
+
+
 }

@@ -1,0 +1,40 @@
+<div class="new-maintainance-contract-template">
+  <mat-card class="contract-template-card">
+    <mat-card-content>
+      <mat-grid-list cols="3" rowHeight="30px">
+        <mat-grid-tile colspan="1" rowspan="2">
+          <img src="../../../assets/viatick.png" alt="Photo of a Shiba Inu" height="42" width="42">
+        </mat-grid-tile>
+        <mat-grid-tile  colspan="2" rowspan="1">
+          <div class="template-value" style="font-size: 14pt; font-weight: 500;">
+            {{template[0].name}}
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="1">
+          <div class="template-value">
+            {{template[0].templateId}}
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1" class="template-attribute">
+          <div>{{template[0].provider}}</div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="1">
+          <div  class="template-value">
+            {{template[0].details}}
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan='2' class="template-attribute">
+          <div>
+            <!-- Condition -->
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan='2'>
+          <mat-chip-list  class="template-value">
+            <mat-chip color="accent" selected="true" *ngFor="let condition of conditions">{{condition}}</mat-chip>
+          </mat-chip-list>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <button mat-raised-button (click) = "goToRequestMaintainance()" class="new-button">+ New Contract Request</button>
+    </mat-card-content>
+  </mat-card>
+</div>

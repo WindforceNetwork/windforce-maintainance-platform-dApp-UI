@@ -57,9 +57,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ParticlesModule } from 'angular-particle';
 import { TextFormatPipe } from './text-format.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TruncatePipe } from './truncate.pipe';
+import { CompositeCardComponent } from './composite-card/composite-card.component';
+import { RegisterComponent } from './page/register/register.component';
 
 const ROUTES: Route[] = [
-  { path: '', component: LoginComponent},
+  { path: '', component: LoginComponent},  
+  { path: 'register', component: RegisterComponent},
   { path: 'service', component: ServiceComponent},
   { path: 'contract', component: ContractRequestComponent},
   { path: 'template', component: ContractTemplateComponent},
@@ -85,6 +89,9 @@ const ROUTES: Route[] = [
     WalletComponent,
     NewTemplateDialogComponent,
     TextFormatPipe,
+    TruncatePipe,
+    CompositeCardComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

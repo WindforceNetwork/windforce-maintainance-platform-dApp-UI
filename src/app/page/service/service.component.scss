@@ -146,3 +146,15 @@ h3 {
      border-radius: 999px;
      right: 0;
 }
+//fix footer
+.body-div{
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.content-div{
+  flex: 1 0 auto;
+}
+.footer {
+  height: 500px
+}

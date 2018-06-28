@@ -13,9 +13,12 @@ export class ContractsService {
 	private _web3: any;
 
 	private _tokenContract: any;
-	private _tokenContractAddress: string = "0xbc84f3bf7dd607a37f9e5848a6333e6c188d926c";
+	private _tokenContractAddress: string = "0x4A21A23e52bD9e8E6D113351DD1C79D6e80D3559";
 
 	private _HttpProviderURL: string = "http://localhost:8545";
+
+
+	public txNumber: number;
 
 	constructor() { 
 		if (typeof window.web3 !== 'undefined') {
@@ -52,11 +55,28 @@ export class ContractsService {
 
 		return Promise.resolve(this._account);
 	}
-	public getAccountBalance(address: string): number{
+	public getAccountBalance(address: string): any{
 		return this._web3.eth.getBalance(address);
 	}
+	/*public unlockAccount(address: string): any{
+		return 
+	}*/
+
+	public createAccount(): any{
+		return this._web3.eth.create();	
+	}
 	public getAccountTransactions(address: string): any{
-		return this._web3.eth.getTransaction(address);
+		let currentTXnumber = this._web3.eth.blockNumber;
+		this.txNumber = currentTXnumber;
+		let recentTransactions: Array<any> = [];
+		for(let i = 0; i < 100 && currentTXnumber - i >= 0; i++){
+			let transactions = this._web3.eth.getTransactionFromBlock(currentTXnumber - i);
+			if(transactions&&(transactions.to == address || transactions.from == address)){
+				recentTransactions.push(transactions);
+			}
+		}
+		return recentTransactions;
+
 	}
 	public async getUserBalance(): Promise<number> {
 		let account = await this.getAccount();
