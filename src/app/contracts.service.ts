@@ -29,7 +29,7 @@ export class ContractsService {
 
 		this._web3.setProvider(new this._web3.providers.HttpProvider(this._HttpProviderURL));
 
-		//this._tokenContract = this._web3.eth.contract(tokenAbi).at(this._tokenContractAddress);
+		//this._tokenContract = this._web 3.eth.contract(tokenAbi).at(this._tokenContractAddress);
 	}
 	public async getAccount(): Promise<string> {
 		if (this._account == null) {
@@ -58,10 +58,8 @@ export class ContractsService {
 	public getAccountBalance(address: string): any{
 		return this._web3.eth.getBalance(address);
 	}
-	/*public unlockAccount(address: string): any{
-		return 
-	}*/
-
+	
+	
 	public createAccount(): any{
 		return this._web3.eth.create();	
 	}
