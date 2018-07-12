@@ -42,7 +42,7 @@ contract Ownable {
 
 contract Maintainance is Ownable{
     address public editor;
-    
+
     struct Template {
         string description;
         uint rate;
@@ -78,7 +78,7 @@ contract Maintainance is Ownable{
     mapping(address=>contractDetail[]) addressToContractDetailArray;
     ContractCore [] public allContracts;
     Template [] public allTemplates;
-    
+
     event NewTemplate(
         string description,
         uint rate,
@@ -117,13 +117,13 @@ contract Maintainance is Ownable{
         string name,
         string date
     );
-    
+
     event contractAccepted(
         uint id,
         address owner,
         address client
     );
-    
+
     modifier ownerOfContract(uint id){
         require(contractToAddress[id]==msg.sender);
         _;
@@ -136,13 +136,13 @@ contract Maintainance is Ownable{
         require(msg.sender == editor);
         _;
     }
-    
+
     constructor()public {
         editor = msg.sender;
         templateIdCounter = 0;
         contractIdCounter = 0;
     }
-    
+
     function createTemplate(
         string description,
         uint rate,
@@ -150,39 +150,66 @@ contract Maintainance is Ownable{
         bool perUnitRate,
         string recurringBy) public{
         //TODO: check for duplicates
-        Template memory template = Template(description, rate, recurring, perUnitRate, recurringBy);
+        // Template memory template = Template(description, rate, recurring, perUnitRate, recurringBy);
         templateToAddress[templateIdCounter] = msg.sender;
-        idToTemplate[templateIdCounter] = template;
+        idToTemplate[templateIdCounter].description = description;
+        idToTemplate[templateIdCounter].rate = rate;
+        idToTemplate[templateIdCounter].recurring = recurring;
+        idToTemplate[templateIdCounter].perUnitRate = perUnitRate;
+        idToTemplate[templateIdCounter].recurringBy = recurringBy;
         templateIdCounter++;
         if(addressToTemplateArray[msg.sender].length != 0){
-            addressToTemplateArray[msg.sender].push(template);
+            uint256 idx = addressToTemplateArray[msg.sender].length;
+            addressToTemplateArray[msg.sender][idx].description = description;
+            addressToTemplateArray[msg.sender][idx].rate = rate;
+            addressToTemplateArray[msg.sender][idx].recurring = recurring;
+            addressToTemplateArray[msg.sender][idx].perUnitRate = perUnitRate;
+            addressToTemplateArray[msg.sender][idx].recurringBy = recurringBy;
         }else{
-            Template[] memory templates = new Template[](1);
-            templates[0] = template;
-            addressToTemplateArray[msg.sender] = templates;
+            addressToTemplateArray[msg.sender][0].description = description;
+            addressToTemplateArray[msg.sender][0].rate = rate;
+            addressToTemplateArray[msg.sender][0].recurring = recurring;
+            addressToTemplateArray[msg.sender][0].perUnitRate = perUnitRate;
+            addressToTemplateArray[msg.sender][0].recurringBy = recurringBy;
+            // Template[] memory templates = new Template[](1);
+            // templates[0] = template;
+            // addressToTemplateArray[msg.sender] = templates;
         }
     }
-    
+
     function createContract(
-        string date,
         uint rate,
         uint unit,
-        address owner,
-        address client
+        address owner
         ) public {
-        ContractCore memory tempContract = ContractCore("pending", contractIdCounter, rate, unit, owner, client);
+        // ContractCore memory tempContract = ContractCore("pending", contractIdCounter, rate, unit, owner, client);
         contractToAddress[contractIdCounter] = msg.sender;
-        idToContractCore[contractIdCounter] = tempContract;
+        idToContractCore[contractIdCounter].status = "pending";
+        idToContractCore[contractIdCounter].id = contractIdCounter;
+        idToContractCore[contractIdCounter].rate = rate;
+        idToContractCore[contractIdCounter].unit = unit;
+        idToContractCore[contractIdCounter].owner = owner;
         contractIdCounter++;
         if(addressToContractCoreArray[msg.sender].length != 0){
-            addressToContractCoreArray[msg.sender].push(tempContract);
+            uint256 idx = addressToContractCoreArray[msg.sender].length;
+            // addressToContractCoreArray[msg.sender][idx].
+            addressToContractCoreArray[msg.sender][idx].status = "pending";
+            addressToContractCoreArray[msg.sender][idx].id = contractIdCounter;
+            addressToContractCoreArray[msg.sender][idx].rate = rate;
+            addressToContractCoreArray[msg.sender][idx].unit = unit;
+            addressToContractCoreArray[msg.sender][idx].owner = owner;
         }else{
-            ContractCore[] memory contracts = new ContractCore[](1);
-            contracts[0] = tempContract;
-            addressToContractCoreArray[msg.sender] = contracts;
+            // ContractCore[] memory contracts = new ContractCore[](1);
+            addressToContractCoreArray[msg.sender][0].status = "pending";
+            addressToContractCoreArray[msg.sender][0].id = contractIdCounter;
+            addressToContractCoreArray[msg.sender][0].rate = rate;
+            addressToContractCoreArray[msg.sender][0].unit = unit;
+            addressToContractCoreArray[msg.sender][0].owner = owner;
+            // uint256 idx = addressToContractCoreArray[msg.sender].length + 1;
+            // addressToContractCoreArray[msg.sender][0]
         }
     }
-    
+
     function acceptContract(uint id) public payable ownerOfContract(id) returns(bool){
         require(bytes(idToContractCore[id].status).length!= 0);
         require(msg.value >= idToContractCore[id].rate);
@@ -191,18 +218,10 @@ contract Maintainance is Ownable{
         emit contractAccepted(id, msg.sender, idToContractCore[id].client);
         return true;
     }
-    
-    function getContract(uint id) public returns(
-        string provider,
-        string description,
-        string name,
-        string date,
-        uint rate,
-        uint recurrenceNo,
-        uint unit
-        ){
+
+    function getContract(uint id) public returns (bool) {
         require(bytes(idToContractCore[id].status).length != 0);
-        
+
         emit newContract(
             idToContractCore[id].status,
             id,
@@ -211,10 +230,10 @@ contract Maintainance is Ownable{
             idToContractCore[id].owner,
             idToContractCore[id].client
             );
-        
+
     }
-    
-    function getTemplate(uint id) public returns(
+
+    function getTemplate(uint id) public view returns(
         string description,
         uint rate,
         bool recurring,
@@ -229,9 +248,9 @@ contract Maintainance is Ownable{
             idToTemplate[id].perUnitRate,
             idToTemplate[id].recurringBy
             );
-        
+
     }
-    
+
     function updateContractProvider(uint id, string provider) public ownerOfContract(id) returns(bool) {
         idToContractDetail[id].provider = provider;
         emit updateContractDetail(
@@ -244,7 +263,7 @@ contract Maintainance is Ownable{
         );
         return true;
     }
-    
+
     function updateContractDescription(uint id, string description) public ownerOfContract(id) returns(bool){
         idToContractDetail[id].description = description;
         emit updateContractDetail(
@@ -269,7 +288,7 @@ contract Maintainance is Ownable{
         );
         return true;
     }
-    
+
     function updateContractDate(uint id, string date) public ownerOfContract(id) returns(bool){
         idToContractDetail[id].date = date;
         emit updateContractDetail(
@@ -282,7 +301,7 @@ contract Maintainance is Ownable{
         );
         return true;
     }
-    
+
     function updateContractStatus(uint id, string status) public returns(bool){
         idToContractCore[id].status = status;
         emit UpdateContractCore(
@@ -294,9 +313,9 @@ contract Maintainance is Ownable{
             idToContractCore[id].client
         );
         return true;
-        
+
     }
-    
+
     function updateContractRate(uint id, uint rate) public ownerOfContract(id) returns(bool){
         idToContractCore[id].rate = rate;
         emit UpdateContractCore(
@@ -382,7 +401,7 @@ contract Maintainance is Ownable{
             idToTemplate[id].perUnitRate,
             recurringBy
         );
-    }   
+    }
     function deleteTemplate(uint id) public ownerOfTemplate(id) returns (bool){
         delete idToTemplate[id];
         return true;
@@ -391,7 +410,7 @@ contract Maintainance is Ownable{
         delete idToContractCore[id];
         return true;
     }
-    
+
     function updateSecondaryContractMapping(ContractCore tempContract) internal {
         for(uint i = 0; i < addressToContractCoreArray[msg.sender].length; i ++){
             if(addressToContractCoreArray[msg.sender][i].id == tempContract.id){
@@ -399,16 +418,13 @@ contract Maintainance is Ownable{
             }
         }
     }
-    // admin functions, add isEidtor modifier
-    function getAllContract() public {
-        
-    }
     
-    
-    
-    
-    
-    
+
+
+
+
+
+
 }
 
 contract Clearance is Maintainance{
@@ -426,7 +442,7 @@ contract accountContract{
     }
     mapping(string=>address) usernameToAddress;
     mapping(string=>Account) usernameToAccount;
-    
+
     modifier ownerOf(string username){
         require(usernameToAddress[username]==msg.sender);
         _;
@@ -450,7 +466,7 @@ contract accountContract{
         Account memory acc = Account(name, company);
         usernameToAccount[username] = acc;
     }
-    
+
     function updateUserInfo(string username, string name, string company) external ownerOf(username){
         Account memory acc = Account(name, company);
         usernameToAccount[username] = acc;
@@ -459,11 +475,5 @@ contract accountContract{
         Account memory acc = Account(name, company);
         usernameToAccount[username] = acc;
     }
-    function editMapping(string username, address add) external isEditor{
-        //Todo: change mapping
-    }
-    
     
 }
- 
-
